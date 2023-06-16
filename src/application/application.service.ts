@@ -23,6 +23,25 @@ export class ApplicationService {
     return this.applicationRepository.find();
   }
 
+  // sort=author asc,datepublished desc
+  sort(sort) {
+    const order = {};
+    const array = sort.split(',');
+
+    for (const i of array) {
+      const result = i.split(' ');
+      order[result[0]] = result[1];
+    }
+
+    return this.applicationRepository.find({
+      // order: {
+      //   status: 'ASC',
+      //   date_of_submission: 'DESC',
+      // },
+      order: order,
+    });
+  }
+
   findOne(id: number) {
     return this.applicationRepository.findOneBy({ id: id });
   }

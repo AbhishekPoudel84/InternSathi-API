@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { ApplicationService } from './application.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
@@ -17,13 +26,21 @@ export class ApplicationController {
     return this.applicationService.findAll();
   }
 
+  @Get('sort')
+  sort(@Query('sortby') sort) {
+    return this.applicationService.sort(sort);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.applicationService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApplicationDto: UpdateApplicationDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateApplicationDto: UpdateApplicationDto,
+  ) {
     return this.applicationService.update(+id, updateApplicationDto);
   }
 

@@ -12,5 +12,5 @@ export class Application {
   status: string;
 
   @Column()
-  date_of_submission: string;
+  date_of_submission: string; //change to dateColumn
 }
